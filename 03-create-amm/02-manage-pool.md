@@ -1,4 +1,6 @@
-## Manage Pool
+## Create AMM
+
+#### Manage Pool
 
 ---
 

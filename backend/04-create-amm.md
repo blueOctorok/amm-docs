@@ -32,7 +32,7 @@ npx hardhat test test/AMM.js
 `AMM.sol`
 Import `Token.sol`.
 Now you need two `state variables`.
-`Token public token1` - `Token public token2`
+`Token public token1` & `Token public token2`
 You now need to set these in the `constructor`.
 
 ```solidity

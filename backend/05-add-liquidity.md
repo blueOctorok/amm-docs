@@ -109,4 +109,34 @@ We still want to make sure the deployer still has 100 shares
 `expect(await amm.shares(deployer.address)).to.equal(tokens(100))`
 Now we have 150 total shares.
 `expect(await amm.totalShares()).to.equal(tokens(150))`
-47:09
+
+`AMM.sol`
+Determine how many `token2` tokens must be deposited when depositing liquidity for `token1`.
+So this will get its own function called `calculateToken2Deposit()`.
+You will notice a keyword here of `view` in the function signature.
+This means the function promises not to modify the blockchain state. It's read-only, used for retrieving data like balances.
+In this function we do some simply calculations. `token2Amount = (token2Balance * _token1Amount) / token1Balance`
+We simply write a similar function for `token1` deposit.
+
+`AMM.js`
+To test for this **LP adds liquidity**, we change the amount arguments.
+
+```js
+// Calculate token2 deposit amount
+let token2Deposit = await amm.calculateToken2Deposit(amount)
+
+// LP adds liquidity
+transaction = await amm
+  .connect(liquidityProvider)
+  .addLiquidity(amount, token2Deposit)
+await transaction.wait()
+```
+
+This is being tested within:
+
+```js
+describe('Swapping tokens', () => {
+    let amount, transaction, result, estimate, balance
+
+    it('facilitates swaps', async () => {
+```

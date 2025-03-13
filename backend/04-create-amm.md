@@ -1,5 +1,7 @@
 ## Create AMM
 
+---
+
 You will use the old `Token.sol` from the other projects. Put this in your `contracts` folder.
 Now create a new file in `contracts`. `AMM.sol`. Copy the boilerplate, also a new `AMM.js` for testing.
 
